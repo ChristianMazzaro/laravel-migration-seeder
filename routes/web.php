@@ -3,8 +3,10 @@
 use Illuminate\Support\Facades\Route;
 
 //models
-
 use App\Models\Train;
+
+//controllers
+use App\Http\Controllers\Guest\TrainController; 
 
 /*
 |--------------------------------------------------------------------------
@@ -21,9 +23,13 @@ Route::get('/', function () {
     return view('homePage');
 });
 
-Route::get('/trains', function () {
-    $trains = Train::all();
-    dd($trains);
-    return view('trains');
-});
+Route::get('/trains/{id}', [TrainController::class,'show'])->name('trains.show');
+
+Route::get('/trains', [TrainController::class,'index'])->name('trains.index');
+
+// Route::get('/trains', function () {
+//     $trains = Train::all();
+//     dd($trains);
+//     return view('trains');
+// });
 
